@@ -1,0 +1,52 @@
+/* ══════════════════════════════════════════════════════════════
+   IDEO CHAT WIDGET — responsive sizing and polish
+   The panel is fixed, so it has to fit the viewport rather than a
+   container. Sized off dvh so mobile browser chrome cannot push
+   the composer off-screen.
+   ══════════════════════════════════════════════════════════════ */
+
+.cw{width:min(360px, calc(100vw - 24px));
+  max-height:calc(100dvh - 120px);
+  display:flex;flex-direction:column;
+  box-shadow:0 30px 70px -22px rgba(42,26,94,.5), 0 8px 22px -12px rgba(42,26,94,.3);
+  transform:translateY(16px) scale(.965);
+  transition:opacity .3s var(--e), transform .34s var(--e)}
+
+/* the status line must not wrap the header onto two rows */
+.cw-top{align-items:center}
+.cw-top > div{min-width:0;flex:1}
+.cw-top small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.cw-top small .dot{display:inline-block;vertical-align:middle;margin-right:5px}
+.cw-x{flex:none;transition:background .25s, color .25s, transform .3s var(--e)}
+.cw-x:hover{background:var(--navy-tint);color:var(--navy-2);transform:rotate(90deg)}
+
+/* the message area takes whatever height is left */
+.cw-body{height:auto;flex:1 1 auto;min-height:180px;
+  overscroll-behavior:contain;scroll-behavior:smooth}
+.cw-foot{flex:none}
+
+/* quick-reply chips */
+.cw-foot .chips{display:flex;flex-wrap:wrap;gap:7px}
+.cw-foot .chips button{transition:background .25s, border-color .25s, color .25s,
+  transform .3s var(--e)}
+.cw-foot .chips button:hover{transform:translateY(-2px)}
+
+@media (max-width:520px){
+  .cw{right:12px;left:12px;width:auto;bottom:88px;
+      max-height:calc(100dvh - 150px)}
+  .cw-body{min-height:200px}
+  .cw-top{padding:11px 12px}
+  .cw-top b{font-size:.9rem}
+  .cw-top small{font-size:.66rem}
+}
+
+/* very short screens: keep the composer reachable */
+@media (max-height:620px){
+  .cw{max-height:calc(100dvh - 96px);bottom:70px}
+  .cw-body{min-height:140px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cw{transition:none;transform:none}
+  .cw-x:hover,.cw-foot .chips button:hover{transform:none}
+}

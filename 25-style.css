@@ -1,0 +1,106 @@
+/* ══════════════════════════════════════════════════════════════
+   MEET OUR TEAM — a slow marquee of portrait cards.
+   Dark, glass-edged cards so the photography carries the section.
+   ══════════════════════════════════════════════════════════════ */
+.tmx{position:relative;overflow:hidden;padding:clamp(52px,6.5vw,92px) 0;
+  background:linear-gradient(168deg,#150B36 0%,#241355 46%,#3A1E7E 100%);
+  color:rgba(255,255,255,.78)}
+.tmx::before,.tmx::after{content:'';position:absolute;pointer-events:none;border-radius:50%}
+.tmx::before{left:-10%;top:-18%;width:46%;height:62%;
+  background:radial-gradient(circle,rgba(187,254,17,.18),transparent 66%)}
+.tmx::after{right:-12%;bottom:-22%;width:50%;height:66%;
+  background:radial-gradient(circle,rgba(139,92,246,.30),transparent 68%)}
+.tmx .shell{position:relative;z-index:2}
+
+.tmx-head{max-width:620px;margin:0 auto;text-align:center}
+.tmx-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);color:#fff;
+  font-size:.73rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.tmx-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--lime);
+  animation:tmxPulse 2.2s var(--e) infinite}
+@keyframes tmxPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.tmx-head h2{margin:16px 0 0;color:#fff;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.16}
+.tmx-head h2{letter-spacing:-.02em;color:#fff}
+.tmx-head h2 em{font-style:normal;color:#fff}
+.tmx-head p{margin:13px auto 0;max-width:54ch;font-size:.98rem;line-height:1.72;
+  color:rgba(255,255,255,.72)}
+
+/* ── the strip ─────────────────────────────────────────────── */
+.tmx-mq{position:relative;margin-top:clamp(30px,4vw,48px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
+.tmx-track{display:flex;gap:22px;width:max-content;padding:14px 0 20px;
+  animation:tmxScroll 46s linear infinite}
+.tmx-mq:hover .tmx-track,.tmx-mq:focus-within .tmx-track{animation-play-state:paused}
+@keyframes tmxScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 11px))}}
+
+/* ── one person ────────────────────────────────────────────── */
+.tmx-card{position:relative;flex:0 0 272px;border-radius:24px;overflow:hidden;isolation:isolate;
+  background:#1B1040;border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 26px 54px -28px rgba(8,3,26,.95);
+  transform:translateZ(0);
+  transition:transform .5s var(--e),box-shadow .5s var(--e),border-color .4s}
+.tmx-card:hover{transform:translateY(-12px);border-color:rgba(187,254,17,.55);
+  box-shadow:0 40px 74px -28px rgba(8,3,26,1),0 0 0 1px rgba(187,254,17,.22)}
+
+.tmx-photo{position:relative;aspect-ratio:3/4;overflow:hidden}
+.tmx-photo img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.96) contrast(1.02);
+  transition:transform .8s var(--e),filter .5s}
+.tmx-card:hover .tmx-photo img{transform:scale(1.07);filter:saturate(1.06) contrast(1.04)}
+.tmx-scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(21,11,54,0) 34%,rgba(21,11,54,.72) 74%,#1B1040 100%);
+  transition:opacity .5s}
+.tmx-card:hover .tmx-scrim{opacity:.92}
+
+/* the sheen that crosses on hover */
+.tmx-glow{position:absolute;top:0;left:-130%;width:62%;height:100%;z-index:3;pointer-events:none;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transition:left .85s var(--e)}
+.tmx-card:hover .tmx-glow{left:150%}
+
+/* a lime hairline that draws along the bottom */
+.tmx-edge{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:3;
+  background:linear-gradient(90deg,var(--lime),#A5E80C,transparent);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .6s var(--e)}
+.tmx-card:hover .tmx-edge{transform:scaleX(1)}
+
+.tmx-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 20px 22px}
+.tmx-role{display:inline-block;margin-bottom:8px;padding:5px 11px;border-radius:999px;
+  background:rgba(187,254,17,.16);border:1px solid rgba(187,254,17,.4);color:#E4FFA8;
+  font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  transition:background .35s,color .35s,transform .45s var(--e)}
+.tmx-card:hover .tmx-role{background:var(--lime);color:var(--on-lime);transform:translateY(-2px)}
+.tmx-body h3{margin:0;color:#fff;font-size:1.12rem;line-height:1.25;letter-spacing:-.01em}
+.tmx-body p{margin:7px 0 0;font-size:.82rem;line-height:1.55;color:rgba(255,255,255,.66);
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .5s var(--e),opacity .4s var(--e),margin .5s var(--e)}
+.tmx-card:hover .tmx-body p{max-height:80px;opacity:1}
+
+.tmx-note{margin-top:26px;text-align:center;font-size:.86rem;color:rgba(255,255,255,.6)}
+.tmx-note a{color:var(--lime);text-decoration:none;font-weight:700;
+  border-bottom:1px solid rgba(187,254,17,.4);transition:border-color .3s}
+.tmx-note a:hover{border-color:var(--lime)}
+
+@media (max-width:600px){
+  .tmx-card{flex:0 0 min(238px,72vw)}
+  .tmx-track{gap:16px;animation-duration:34s}
+  .tmx-body{padding:16px 16px 18px}
+  .tmx-body h3{font-size:1.02rem}
+  /* touch has no hover, so the blurb stays visible */
+  .tmx-body p{max-height:80px;opacity:1}
+}
+@media (hover:none){
+  .tmx-body p{max-height:80px;opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .tmx-track{animation:none}
+  .tmx-mq{overflow-x:auto;scrollbar-width:none}
+  .tmx-mq::-webkit-scrollbar{display:none}
+  .tmx-card,.tmx-photo img,.tmx-role,.tmx-glow,.tmx-edge{transition:none}
+  .tmx-card:hover{transform:none}
+  .tmx-card:hover .tmx-photo img{transform:none}
+  .tmx-eyebrow i{animation:none}
+  .tmx-body p{max-height:80px;opacity:1}
+}

@@ -1,0 +1,6 @@
+/* a screen that has already played keeps its messages on show, so
+   moving to the next phone never blanks the one before it */
+.dmx-col.was-on .dmx-msg,
+.dmx-col.was-on .dmx-card{opacity:1;transform:none}
+.dmx-col.was-on:not(.is-on) .dmx-msg,
+.dmx-col.was-on:not(.is-on) .dmx-card{transition-delay:0s}

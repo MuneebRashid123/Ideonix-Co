@@ -1,0 +1,7 @@
+/* the What-you-get cards carry .rv on themselves, so they must be
+   revealed by their own .seen class, not only by a seen ancestor */
+.svpage .sv-card.seen,
+.svpage .svprovide-list li.seen,
+.svpage .svclient.seen,
+.svpage .svstat.seen,
+.svpage .svai-step.seen{opacity:1;transform:none}

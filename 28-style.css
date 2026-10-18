@@ -1,0 +1,3 @@
+/* the reading-progress bar sat across the very top and spoiled the
+   look on a handset (it reads as a broken loading bar) */
+@media (max-width:900px){.page-prog{display:none}}

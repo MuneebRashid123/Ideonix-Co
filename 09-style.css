@@ -1,0 +1,208 @@
+/* ══════════════════════════════════════════════════════════════
+   SERVICE DETAIL — reviews marquee + depth interactions
+   Loaded after the base sheet so these rules win on equal weight.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── review marquee ───────────────────────────────────────── */
+.svrv{position:relative;overflow:hidden;padding:clamp(46px,6vw,78px) 0;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F8F6FF 58%,#F1ECFF 100%);
+  border-block:1px solid var(--line)}
+.svrv::before{content:'';position:absolute;left:50%;top:-10%;width:62%;height:46%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(circle,rgba(187,254,17,.2),transparent 66%)}
+.svrv > .shell{position:relative;z-index:2}
+.svrv-head{max-width:620px;margin:0 auto;text-align:center}
+.svrv-head h2{margin:16px 0 0;color:var(--navy);font-size:clamp(1.55rem,4vw,2.25rem);line-height:1.15}
+.svrv-head h2 em{font-style:normal;position:relative;z-index:0}
+.svrv-head h2 em::after{content:'';position:absolute;left:-3px;right:-3px;bottom:.06em;height:.28em;
+  background:var(--lime);border-radius:3px;z-index:-1}
+.svrv-head p{margin:12px auto 0;max-width:50ch;font-size:.95rem;line-height:1.7;color:var(--body)}
+.svrv-note{margin-top:26px;text-align:center;font-size:.8rem;color:var(--muted)}
+
+.svrv-mq{position:relative;margin-top:clamp(24px,3.5vw,38px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.svrv-track{display:flex;gap:18px;width:max-content;padding:10px 0 16px;
+  animation:svrvScroll 56s linear infinite}
+.svrv-mq:hover .svrv-track,.svrv-mq:focus-within .svrv-track{animation-play-state:paused}
+@keyframes svrvScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 9px))}}
+
+.svrv-card{flex:0 0 330px;display:flex;flex-direction:column;background:#fff;
+  border:1px solid var(--line);border-radius:20px;padding:24px 22px 22px;
+  box-shadow:var(--shadow-sm);transform-origin:50% 100%;
+  transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .3s}
+.svrv-card:hover{transform:translateY(-8px) scale(1.015);border-color:#DDD6FE;box-shadow:var(--shadow-lg)}
+.svrv-card.is-match{border-color:#C4B5FD;box-shadow:0 14px 34px -18px rgba(109,40,217,.5)}
+.svrv-svc{align-self:flex-start;margin-bottom:13px;padding:5px 11px;border-radius:999px;
+  background:var(--navy-tint);border:1px solid #DDD6FE;color:var(--navy-2);
+  font-size:.68rem;font-weight:800;
+  transition:background .3s,border-color .3s,color .3s,transform .35s var(--e)}
+.svrv-card:hover .svrv-svc{background:var(--navy-2);border-color:var(--navy-2);color:#fff;transform:translateX(3px)}
+.svrv-card.is-match .svrv-svc{background:var(--lime);border-color:var(--lime);color:var(--on-lime)}
+.svrv-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.svrv-st{display:flex;gap:2px;color:#F5A623}
+.svrv-st .off{opacity:.22}
+.svrv-date{font-size:.7rem;color:var(--faint)}
+.svrv-metric{margin-top:14px;align-self:flex-start;display:inline-flex;flex-direction:column;
+  padding:9px 13px;border-radius:12px;background:var(--lime-tint);border:1px solid #E4F7B8;
+  transition:transform .4s var(--e)}
+.svrv-card:hover .svrv-metric{transform:translateY(-2px) scale(1.03)}
+.svrv-metric b{font-size:1.06rem;font-weight:800;color:var(--on-lime);line-height:1.1}
+.svrv-metric span{margin-top:2px;font-size:.7rem;font-weight:600;color:#4D7C0F}
+.svrv-q{margin:14px 0 0;font-size:.9rem;line-height:1.66;color:var(--body)}
+.svrv-who{margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:11px}
+.svrv-pfp{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-size:.78rem;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(42,26,94,.35);
+  transition:transform .45s var(--e)}
+.svrv-card:hover .svrv-pfp{transform:rotate(-6deg) scale(1.08)}
+.svrv-who b{display:flex;align-items:center;gap:5px;font-size:.9rem;color:var(--navy)}
+.svrv-vf{display:inline-flex;color:var(--navy-2)}
+.svrv-who small{display:block;margin-top:1px;font-size:.74rem;color:var(--muted)}
+
+/* ── depth: tilt + press on the content cards ─────────────── */
+.svpage .sv-card,
+.svpage .sv-shot,
+.svpage .sv-case{transform-style:preserve-3d;will-change:transform}
+
+.svpage .sv-card{position:relative;overflow:hidden;
+  transform:perspective(900px) translateY(0) rotateX(0) rotateY(0);
+  transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .3s}
+.svpage .sv-card::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),
+    rgba(187,254,17,.16),transparent 62%);
+  transition:opacity .4s}
+.svpage .sv-card:hover::after{opacity:1}
+.svpage .sv-card:hover{
+  transform:perspective(900px) translateY(-9px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.02);
+  border-color:#C4B5FD;box-shadow:0 26px 50px -26px rgba(42,26,94,.55)}
+.svpage .sv-card > *{position:relative;z-index:1}
+
+/* icon: lifts, tilts, recolours, then settles */
+.svpage .sv-card .ic{position:relative;
+  transition:background .4s,color .4s,transform .5s var(--e),box-shadow .4s}
+.svpage .sv-card .ic::before{content:'';position:absolute;inset:-5px;border-radius:18px;
+  border:2px solid var(--lime);opacity:0;transform:scale(.82);
+  transition:opacity .45s,transform .55s var(--e)}
+.svpage .sv-card:hover .ic{
+  background:linear-gradient(140deg,#BBFE11,#A5E80C);color:var(--on-lime);
+  transform:translateY(-7px) rotate(-10deg) scale(1.1);
+  box-shadow:0 16px 28px -14px rgba(165,232,12,.95)}
+.svpage .sv-card:hover .ic::before{opacity:.55;transform:scale(1)}
+.svpage .sv-card:hover .ic svg{animation:svIcon .65s var(--e)}
+@keyframes svIcon{
+  0%{transform:translateY(0) rotate(0)}
+  35%{transform:translateY(-4px) rotate(9deg)}
+  70%{transform:translateY(1px) rotate(-4deg)}
+  100%{transform:translateY(0) rotate(0)}}
+.svpage .sv-card h3{transition:color .3s,transform .4s var(--e)}
+.svpage .sv-card:hover h3{color:var(--navy-2);transform:translateX(3px)}
+
+/* process steps: number badge flips, rail fills */
+.svpage .sv-step{position:relative;overflow:hidden;
+  transition:transform .4s var(--e),box-shadow .4s var(--e),border-color .3s}
+.svpage .sv-step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--lime),#A5E80C);
+  transform:scaleY(0);transform-origin:50% 0;transition:transform .5s var(--e)}
+.svpage .sv-step:hover::before{transform:scaleY(1)}
+.svpage .sv-step:hover{transform:translateX(7px);border-color:#C4B5FD;
+  box-shadow:0 18px 36px -22px rgba(42,26,94,.5)}
+.svpage .sv-step b.n{transition:background .35s,color .35s,transform .55s var(--e),box-shadow .35s}
+.svpage .sv-step:hover b.n{background:var(--lime);color:var(--on-lime);
+  transform:rotateY(180deg) scale(1.08);box-shadow:0 12px 24px -12px rgba(165,232,12,.9)}
+
+/* gallery + case cards */
+.svpage .sv-shot{transform:perspective(1000px);
+  transition:transform .45s var(--e),box-shadow .45s var(--e)}
+.svpage .sv-shot:hover{
+  transform:perspective(1000px) translateY(-9px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  box-shadow:0 26px 50px -26px rgba(42,26,94,.5)}
+.svpage .sv-shot .fr svg{transition:transform .55s var(--e)}
+.svpage .sv-shot:hover .fr svg{transform:scale(1.04)}
+.svpage .sv-case{transform:perspective(1100px);
+  transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .3s}
+.svpage .sv-case:hover{
+  transform:perspective(1100px) translateY(-9px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  border-color:#C4B5FD;box-shadow:0 28px 54px -26px rgba(42,26,94,.55)}
+.svpage .sv-case .fr svg{transition:transform .6s var(--e)}
+.svpage .sv-case:hover .fr svg{transform:scale(1.05)}
+.svpage .sv-res span{transition:transform .4s var(--e),background .3s,border-color .3s}
+.svpage .sv-case:hover .sv-res span{background:var(--lime);border-color:var(--lime)}
+.svpage .sv-case:hover .sv-res span:nth-child(2){transition-delay:.05s}
+.svpage .sv-case:hover .sv-res span:nth-child(3){transition-delay:.1s}
+
+/* pressed state — the "2D→3D touch" on click */
+.svpage .is-press{transition-duration:.13s !important}
+.svpage .sv-card.is-press{
+  transform:perspective(900px) translateY(-2px) scale(.972) rotateX(6deg) !important}
+.svpage .sv-step.is-press{transform:translateX(4px) scale(.985) !important}
+.svpage .sv-shot.is-press,
+.svpage .sv-case.is-press{
+  transform:perspective(1000px) translateY(-2px) scale(.975) rotateX(5deg) !important}
+.svrv-card.is-press{transform:translateY(-2px) scale(.97) !important;transition-duration:.13s !important}
+
+/* ── buttons: sweep, lift, ripple ─────────────────────────── */
+.svpage .btn,.svpage .sv-nav .cta,.svpage .sv-other a{position:relative;overflow:hidden;isolation:isolate}
+.svpage .btn::before,.svpage .sv-nav .cta::before{content:'';position:absolute;top:0;left:-120%;
+  width:65%;height:100%;z-index:-1;transform:skewX(-22deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  transition:left .65s var(--e)}
+.svpage .btn:hover::before,.svpage .sv-nav .cta:hover::before{left:135%}
+.svpage .btn-p:hover{transform:translateY(-4px) scale(1.03);background:#fff;
+  box-shadow:0 20px 36px -16px rgba(187,254,17,.95)}
+.svpage .btn-g:hover{transform:translateY(-4px) scale(1.03);background:rgba(255,255,255,.22);
+  border-color:rgba(187,254,17,.6)}
+.svpage .sv-end .btn-p:hover{background:#3B1F86;transform:translateY(-4px) scale(1.03);
+  box-shadow:0 22px 42px -18px rgba(42,26,94,.95)}
+.svpage .btn:active,.svpage .sv-nav .cta:active,.svpage .sv-other a:active{
+  transform:translateY(-1px) scale(.965)}
+.svpage .btn:hover svg{transform:translateX(5px)}
+
+.sv-ripple{position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+  background:rgba(255,255,255,.55);transform:scale(0);opacity:.75;
+  animation:svRipple .62s var(--e) forwards}
+.svpage .sv-end .btn-p .sv-ripple,.svpage .sv-other a .sv-ripple{background:rgba(187,254,17,.55)}
+@keyframes svRipple{to{transform:scale(2.6);opacity:0}}
+
+/* other services pills */
+.svpage .sv-other a{padding-right:38px;
+  transition:background .35s,border-color .35s,color .35s,transform .4s var(--e),box-shadow .35s}
+.svpage .sv-other a::after{content:'';position:absolute;right:16px;top:50%;width:7px;height:7px;
+  margin-top:-4px;border-right:2px solid currentColor;border-top:2px solid currentColor;
+  transform:rotate(45deg) translateX(-3px);opacity:.45;
+  transition:transform .4s var(--e),opacity .3s}
+.svpage .sv-other a:hover{background:var(--navy-2);border-color:var(--navy-2);color:#fff;
+  transform:translateY(-4px) scale(1.04);box-shadow:0 16px 30px -16px rgba(109,40,217,.75)}
+.svpage .sv-other a:hover::after{transform:rotate(45deg) translateX(1px);opacity:1}
+
+/* hero meta chips + FAQ */
+.svpage .sv-meta span{transition:transform .4s var(--e),background .3s,border-color .3s}
+.svpage .sv-meta span:hover{transform:translateY(-3px);background:rgba(187,254,17,.16);
+  border-color:rgba(187,254,17,.5)}
+.svpage .sv-faq details{transition:border-color .3s,box-shadow .35s,transform .35s var(--e)}
+.svpage .sv-faq details:hover{transform:translateX(4px);border-color:#DDD6FE}
+.svpage .sv-faq summary::after{transition:transform .35s var(--e),color .3s}
+.svpage .sv-faq details[open] summary::after{transform:rotate(180deg);color:var(--lime-2)}
+
+/* keyboard focus stays visible through all of this */
+.svpage .btn:focus-visible,.svpage .sv-other a:focus-visible,
+.svpage .sv-nav .cta:focus-visible,.svrv-card:focus-visible{
+  outline:3px solid var(--lime);outline-offset:3px}
+
+@media (max-width:760px){
+  .svrv-card{flex:0 0 min(300px,84vw);padding:22px 20px 20px}
+  .svrv-track{animation-duration:42s}
+}
+@media (prefers-reduced-motion:reduce){
+  .svrv-track{animation:none}
+  .svrv-mq{overflow-x:auto;scrollbar-width:none}
+  .svrv-mq::-webkit-scrollbar{display:none}
+  .svrv-card,.svpage .sv-card,.svpage .sv-step,.svpage .sv-shot,.svpage .sv-case,
+  .svpage .btn,.svpage .sv-other a,.svpage .sv-faq details{transition:none}
+  .svrv-card:hover,.svpage .sv-card:hover,.svpage .sv-step:hover,.svpage .sv-shot:hover,
+  .svpage .sv-case:hover,.svpage .btn:hover,.svpage .sv-other a:hover,
+  .svpage .sv-faq details:hover{transform:none}
+  .svpage .sv-card:hover .ic{transform:none}
+  .svpage .sv-card:hover .ic svg{animation:none}
+  .svpage .sv-step:hover b.n{transform:none}
+  .sv-ripple{display:none}
+}

@@ -1,0 +1,73 @@
+/* ══════════════════════════════════════════════════════════════
+   Contact details · connector sparks · primary button polish
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── the light travelling along each connector ─────────────── */
+.pf-links .spark{opacity:0;transition:opacity .6s var(--e)}
+.pf-flow.drawn .pf-links .spark{opacity:1;transition-delay:1.2s}
+.pf-links .flow{stroke-dasharray:8 14}
+
+/* ── "Start your project" ──────────────────────────────────── */
+.dsx-btn-p{background:linear-gradient(120deg,#BBFE11 0%,#A5E80C 52%,#CBFF4D 100%);
+  background-size:180% 100%;background-position:0 0;
+  color:var(--on-lime);border:0;
+  box-shadow:0 16px 32px -14px rgba(165,232,12,.95),
+             0 0 0 0 rgba(187,254,17,.55);
+  animation:dsxGlow 3.4s var(--e) infinite;
+  transition:transform .35s var(--e),box-shadow .4s var(--e),
+             background-position .6s var(--e),color .3s}
+@keyframes dsxGlow{
+  0%,100%{box-shadow:0 16px 32px -14px rgba(165,232,12,.95),0 0 0 0 rgba(187,254,17,.5)}
+  55%{box-shadow:0 16px 32px -14px rgba(165,232,12,.95),0 0 0 12px rgba(187,254,17,0)}}
+.dsx-btn-p:hover{background-position:100% 0;transform:translateY(-5px) scale(1.04);
+  box-shadow:0 24px 44px -16px rgba(165,232,12,1);animation-play-state:paused}
+.dsx-btn-p:active{transform:translateY(-1px) scale(.96)}
+.dsx-btn-p svg{transition:transform .4s var(--e)}
+.dsx-btn-p:hover svg{transform:translateX(6px)}
+
+/* ── contact chips under the discuss buttons ───────────────── */
+.dsx-contact{list-style:none;margin:22px 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.dsx-contact a{display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:14px;
+  background:#fff;border:1px solid var(--line);text-decoration:none;
+  transition:transform .4s var(--e),border-color .3s,box-shadow .4s var(--e),background .3s}
+.dsx-contact a:hover{transform:translateY(-4px);border-color:#C4B5FD;box-shadow:var(--shadow-sm)}
+.dsx-contact .ic{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:var(--navy-tint);color:var(--navy-2);
+  transition:background .3s,color .3s,transform .45s var(--e)}
+.dsx-contact .ic svg{width:17px;height:17px}
+.dsx-contact a:hover .ic{background:var(--navy-2);color:#fff;transform:rotate(-8deg) scale(1.08)}
+.dsx-contact .ic.is-wa{background:#E7F9EF;color:#128C7E}
+.dsx-contact a:hover .ic.is-wa{background:#25D366;color:#fff}
+.dsx-contact b{display:block;font-size:.84rem;color:var(--navy)}
+.dsx-contact small{display:block;margin-top:1px;font-size:.76rem;color:var(--muted);
+  overflow-wrap:anywhere}
+
+/* ── contact list in the footer ────────────────────────────── */
+.foot-contact{list-style:none;margin:16px 0 18px;padding:0;display:grid;gap:9px}
+.foot-contact a{display:flex;align-items:center;gap:10px;
+  color:rgba(255,255,255,.82);text-decoration:none;font-size:.88rem;
+  transition:color .3s,transform .35s var(--e)}
+.foot-contact a:hover{color:#fff;transform:translateX(4px)}
+.foot-contact .ic{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:var(--lime);
+  transition:background .3s,border-color .3s,color .3s,transform .4s var(--e)}
+.foot-contact .ic svg{width:15px;height:15px}
+.foot-contact a:hover .ic{background:var(--lime);border-color:var(--lime);color:var(--on-lime);
+  transform:rotate(-8deg) scale(1.08)}
+.foot-contact .ic.is-wa{color:#7BE49B}
+.foot-contact a:hover .ic.is-wa{background:#25D366;border-color:#25D366;color:#fff}
+
+/* ── the extra "Talk to us" card in the service info strip ─── */
+.svinfo-row{grid-template-columns:repeat(auto-fit,minmax(232px,1fr))}
+.svinfo-card.is-talk .ic{background:linear-gradient(140deg,#BBFE11,#A5E80C);color:var(--on-lime)}
+.svinfo-card.is-talk:hover .ic{background:linear-gradient(140deg,#6D28D9,#8B5CF6);color:#fff}
+.svinfo-card.is-talk span{overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:reduce){
+  .dsx-btn-p{animation:none}
+  .dsx-contact a,.foot-contact a,.dsx-contact .ic,.foot-contact .ic{transition:none}
+  .dsx-contact a:hover,.foot-contact a:hover,
+  .dsx-contact a:hover .ic,.foot-contact a:hover .ic{transform:none}
+  .pf-links .spark{display:none}
+}

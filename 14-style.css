@@ -1,0 +1,5 @@
+/* the little card button inside the phone is not a page button */
+.svai .dmx-card .btn{display:block;min-height:0;padding:7px 8px;border-radius:8px;
+  background:#fff;color:#1D1040;font-size:.68rem;font-weight:700;letter-spacing:normal;
+  box-shadow:none;text-align:center;overflow:visible;isolation:auto}
+.svai .dmx-card .btn::before{display:none}

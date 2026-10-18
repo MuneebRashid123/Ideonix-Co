@@ -1,0 +1,2 @@
+/* anchored scrolling must clear the fixed header */
+.svpage > section{scroll-margin-top:calc(var(--navh,62px) + 14px)}

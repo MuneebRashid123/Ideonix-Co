@@ -1,0 +1,134 @@
+/* ══════════════════════════════════════════════════════════════
+   PROCESS FLOW — 3 stages on the top row, 4 on the second, with
+   connectors drawn between them on an SVG layer. Built in markup
+   so it scales, reflows and animates; nothing here is an image.
+   ══════════════════════════════════════════════════════════════ */
+.pf{position:relative;overflow:hidden;padding:clamp(48px,6vw,86px) 0 clamp(56px,7vw,96px);
+  background:linear-gradient(172deg,#FFFFFF 0%,#FBFAFF 44%,#F4F0FF 100%);
+  border-bottom:1px solid var(--line)}
+.pf::before,.pf::after{content:'';position:absolute;pointer-events:none;border-radius:50%}
+.pf::before{left:-8%;top:-14%;width:42%;height:56%;
+  background:radial-gradient(circle,rgba(245,182,46,.2),transparent 66%)}
+.pf::after{right:-10%;bottom:-18%;width:46%;height:60%;
+  background:radial-gradient(circle,rgba(139,92,246,.18),transparent 68%)}
+.pf .shell{position:relative;z-index:2}
+
+.pf-head-top{max-width:640px;margin:0 auto;text-align:center}
+.pf-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;
+  background:var(--navy-tint);border:1px solid #DDD6FE;color:var(--navy-2);
+  font-size:.74rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.pf-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--lime);
+  animation:pfPulse 2.2s var(--e) infinite}
+@keyframes pfPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.pf-head-top h2{margin:16px 0 0;color:var(--navy);font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.16}
+.pf-head-top h2 em{font-style:normal;color:inherit}
+.pf-head-top p{margin:13px auto 0;max-width:56ch;font-size:.98rem;line-height:1.72;color:var(--body)}
+
+/* ── flow layer: cards sit above the drawn connectors ──────── */
+.pf-flow{position:relative;margin-top:clamp(40px,5vw,62px)}
+.pf-links{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+.pf-links path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:3}
+.pf-links .lk{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  transition:stroke-dashoffset 1.1s var(--e)}
+.pf-flow.drawn .pf-links .lk{stroke-dashoffset:0;transition-delay:calc(var(--i,0) * 130ms)}
+.pf-links .flow{stroke-dasharray:7 13;opacity:0;
+  animation:pfDash 1.6s linear infinite;transition:opacity .5s}
+.pf-flow.drawn .pf-links .flow{opacity:.85;transition-delay:1.1s}
+@keyframes pfDash{to{stroke-dashoffset:-40}}
+
+/* arrow pucks, positioned on the connectors by script */
+.pf-dot{position:absolute;z-index:2;width:32px;height:32px;margin:-16px 0 0 -16px;
+  display:grid;place-items:center;border-radius:50%;color:#fff;
+  box-shadow:0 10px 20px -10px rgba(42,26,94,.7);
+  opacity:0;transform:scale(.5);
+  transition:opacity .45s var(--e),transform .5s var(--e),background .3s}
+.pf-flow.drawn .pf-dot{opacity:1;transform:scale(1);transition-delay:calc(var(--i,0) * 130ms + 380ms)}
+.pf-dot svg{width:15px;height:15px;animation:pfNudge 2.4s var(--e) infinite}
+@keyframes pfNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+.pf-dot.amber{background:#F5B82E}
+.pf-dot.violet{background:#7C3AED}
+
+/* ── the grid: 3 across, then 4 ─────────────────────────────── */
+.pf-grid{position:relative;z-index:1;display:grid;
+  column-gap:clamp(52px,5vw,88px);row-gap:clamp(66px,5.6vw,92px);
+  grid-template-columns:repeat(12,minmax(0,1fr))}
+.pf-step{grid-column:span 4}
+.pf-step:nth-child(n+4){grid-column:span 3}
+
+.pf-step{position:relative;display:flex;flex-direction:column;
+  padding:34px 20px 20px;border-radius:22px;background:#fff;
+  border:1px solid var(--line);box-shadow:0 16px 36px -26px rgba(42,26,94,.45);
+  opacity:0;transform:translateY(26px);
+  transition:opacity .6s var(--e),transform .6s var(--e),
+             box-shadow .45s var(--e),border-color .35s}
+.pf-grid.seen .pf-step{opacity:1;transform:none;transition-delay:calc(var(--n) * 90ms)}
+.pf-step:hover{transform:translateY(-10px);border-color:#C4B5FD;
+  box-shadow:0 32px 62px -28px rgba(42,26,94,.5)}
+
+/* number badge, half outside the card, alternating like the reference */
+.pf-num{position:absolute;top:-24px;left:18px;width:62px;height:62px;border-radius:50%;
+  display:grid;place-items:center;font-size:1.26rem;font-weight:800;letter-spacing:-.02em;
+  border:5px solid #fff;
+  transition:transform .55s var(--e),box-shadow .45s var(--e)}
+.pf-step:nth-child(odd) .pf-num{background:#F5B82E;color:#3D2A00;
+  box-shadow:0 14px 28px -14px rgba(245,184,46,.95)}
+.pf-step:nth-child(even) .pf-num{background:linear-gradient(150deg,#6D28D9,#8B5CF6);color:#fff;
+  box-shadow:0 14px 28px -14px rgba(109,40,217,.95)}
+.pf-step:hover .pf-num{transform:rotate(-10deg) scale(1.1)}
+
+.pf-head{margin-left:74px;min-height:52px}
+.pf-head h3{margin:0;font-size:1.06rem;line-height:1.25;color:var(--navy);
+  transition:color .3s,transform .4s var(--e)}
+.pf-step:hover .pf-head h3{color:var(--navy-2);transform:translateX(3px)}
+.pf-head p{margin:4px 0 0;font-size:.82rem;color:var(--muted)}
+
+.pf-body{display:flex;align-items:center;gap:14px;margin-top:18px}
+.pf-icon{flex:none;width:84px;height:84px;display:grid;place-items:center;border-radius:20px;
+  background:linear-gradient(150deg,#F8F5FF,#EFE9FF);
+  animation:pfFloat 5s var(--e) infinite;
+  transition:background .35s,transform .5s var(--e),box-shadow .4s}
+.pf-icon svg{width:56px;height:56px;display:block}
+@keyframes pfFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.pf-step:hover .pf-icon{background:linear-gradient(150deg,#FFF6E0,#FDEBC2);
+  transform:scale(1.08) rotate(-6deg);
+  box-shadow:0 16px 30px -16px rgba(109,40,217,.6);animation-play-state:paused}
+
+.pf-list{list-style:none;margin:0;padding:0;display:grid;gap:7px;flex:1;min-width:0}
+.pf-list li{display:flex;align-items:flex-start;gap:8px;
+  font-size:.83rem;line-height:1.45;color:var(--body);
+  opacity:0;transform:translateX(-8px);
+  transition:opacity .45s var(--e),transform .45s var(--e),color .3s}
+.pf-grid.seen .pf-list li{opacity:1;transform:none;
+  transition-delay:calc(var(--n) * 90ms + var(--li,0) * 70ms + 180ms)}
+.pf-list li:nth-child(1){--li:0}.pf-list li:nth-child(2){--li:1}
+.pf-list li:nth-child(3){--li:2}.pf-list li:nth-child(4){--li:3}
+.pf-list .tk{flex:none;width:14px;height:14px;margin-top:2px;color:#65A30D;
+  transition:transform .35s var(--e),color .3s}
+.pf-step:hover .pf-list li{color:var(--navy)}
+.pf-step:hover .pf-list .tk{color:var(--navy-2);transform:scale(1.2)}
+
+.pf-when{align-self:flex-start;margin-top:18px;padding:7px 14px;border-radius:999px;
+  font-size:.74rem;font-weight:800;
+  transition:transform .4s var(--e),background .3s,color .3s}
+.pf-step:nth-child(odd) .pf-when{background:#FEF6E3;border:1px solid #F7E3B3;color:#8A5B00}
+.pf-step:nth-child(even) .pf-when{background:var(--navy-tint);border:1px solid #DDD6FE;color:var(--navy-2)}
+.pf-step:hover .pf-when{transform:translateY(-3px) scale(1.04)}
+
+@media (max-width:1080px){
+  .pf-step,.pf-step:nth-child(n+4){grid-column:span 6}
+}
+@media (max-width:680px){
+  .pf-step,.pf-step:nth-child(n+4){grid-column:span 12}
+  .pf-grid{gap:34px}
+  .pf-icon{width:70px;height:70px}
+  .pf-icon svg{width:46px;height:46px}
+}
+@media (prefers-reduced-motion:reduce){
+  .pf-step,.pf-list li{opacity:1;transform:none;transition:none}
+  .pf-icon,.pf-eyebrow i,.pf-dot svg{animation:none}
+  .pf-links .lk{stroke-dashoffset:0;transition:none}
+  .pf-links .flow{display:none}
+  .pf-dot{opacity:1;transform:scale(1);transition:none}
+  .pf-step:hover,.pf-step:hover .pf-num,.pf-step:hover .pf-icon,
+  .pf-step:hover .pf-when{transform:none}
+}

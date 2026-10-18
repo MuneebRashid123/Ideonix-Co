@@ -1,0 +1,87 @@
+/* ══════════════════════════════════════════════════════════════
+   AI DM playback + "What we provide" motion
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── bubbles are driven by .show, not by transition-delay ──
+   High specificity so the older .dmx-col.is-on rules cannot
+   reveal the whole thread at once. */
+.svai .dmx-col .dmx-msg,
+.svai .dmx-col .dmx-card{
+  transition:opacity .4s var(--e), transform .4s var(--e) !important;
+  transition-delay:0s !important}
+.svai .dmx-col.is-on .dmx-msg:not(.show),
+.svai .dmx-col.is-on .dmx-card:not(.show),
+.svai .dmx-col .dmx-msg:not(.show),
+.svai .dmx-col .dmx-card:not(.show){opacity:0;transform:translateY(10px) scale(.97)}
+.svai .dmx-col .dmx-msg.show,
+.svai .dmx-col .dmx-card.show{opacity:1;transform:none}
+
+/* typing indicator */
+.svai .dmx-msg.svai-typing{display:inline-flex;align-items:center;gap:5px;
+  opacity:1 !important;transform:none !important;
+  padding:11px 13px;width:auto;max-width:70px}
+.svai-typing i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.65);
+  animation:svDot 1.1s var(--e) infinite}
+.svai-typing i:nth-child(2){animation-delay:.16s}
+.svai-typing i:nth-child(3){animation-delay:.32s}
+@keyframes svDot{0%,60%,100%{transform:translateY(0);opacity:.45}
+                 30%{transform:translateY(-4px);opacity:1}}
+
+/* the phone lights up while the thread is running */
+.svai-stage .dmx-phone{transition:box-shadow .6s var(--e)}
+.svai-stage.is-done .dmx-phone{box-shadow:0 40px 80px -30px rgba(187,254,17,.35),
+  0 22px 50px -26px rgba(23,19,39,.7)}
+.svai-replay{opacity:.65;transition:opacity .4s,background .3s,border-color .3s,transform .35s var(--e)}
+.svai-stage.is-done .svai-replay{opacity:1}
+
+/* step numbers are decorative: the <ol> already conveys order */
+.svai-steps{list-style:none}
+
+/* ── What we provide: entrance + hover ─────────────────────── */
+.svprovide-main,.svprovide-card,.svprovide-tools{
+  transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .3s}
+.svprovide-main:hover{transform:translateY(-5px);border-color:#C4B5FD;
+  box-shadow:0 26px 52px -26px rgba(42,26,94,.45)}
+.svprovide-tools:hover{transform:translateY(-5px);border-color:#C4B5FD;
+  box-shadow:0 26px 52px -26px rgba(42,26,94,.45)}
+
+/* the dark card gets a slow sheen and lifts */
+.svprovide-card{position:relative;overflow:hidden;isolation:isolate}
+.svprovide-card::after{content:'';position:absolute;top:0;left:-140%;width:70%;height:100%;z-index:-1;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(187,254,17,.16),transparent);
+  transition:left .9s var(--e)}
+.svprovide-card:hover::after{left:150%}
+.svprovide-card:hover{transform:translateY(-6px);
+  box-shadow:0 30px 58px -26px rgba(42,26,94,.9)}
+.svprovide-card .ic{transition:transform .5s var(--e),box-shadow .4s}
+.svprovide-card:hover .ic{transform:rotate(-10deg) scale(1.1);
+  box-shadow:0 14px 28px -12px rgba(187,254,17,.9)}
+
+/* rows slide and the tick pops */
+.svprovide-list li{transition:opacity .55s var(--e),transform .55s var(--e),
+  background .3s,box-shadow .3s}
+.svprovide-list li:hover{box-shadow:0 10px 22px -16px rgba(42,26,94,.5)}
+.svprovide-list li .tick svg{transition:transform .4s var(--e)}
+.svprovide-list li:hover .tick svg{transform:scale(1.15)}
+
+/* the eyebrow/heading rise together with the grid */
+.svprovide .sv-head{transition:opacity .6s var(--e),transform .6s var(--e)}
+.svtools span{position:relative}
+.svtools span:hover{box-shadow:0 12px 24px -14px rgba(109,40,217,.8)}
+
+/* the included-AI note reacts too */
+.svai-note{transition:transform .45s var(--e),box-shadow .45s var(--e)}
+.svai-note:hover{transform:translateY(-4px);box-shadow:0 28px 54px -26px rgba(42,26,94,.9)}
+.svai-note .ic{transition:transform .5s var(--e)}
+.svai-note:hover .ic{transform:rotate(-12deg) scale(1.1)}
+
+@media (prefers-reduced-motion:reduce){
+  .svai .dmx-col .dmx-msg:not(.show),
+  .svai .dmx-col .dmx-card:not(.show){opacity:1;transform:none}
+  .svai-typing{display:none !important}
+  .svprovide-main,.svprovide-card,.svprovide-tools,.svai-note,.svprovide-list li{transition:none}
+  .svprovide-main:hover,.svprovide-card:hover,.svprovide-tools:hover,
+  .svai-note:hover,.svprovide-list li:hover{transform:none}
+  .svprovide-card::after{display:none}
+}

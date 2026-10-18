@@ -1,0 +1,26 @@
+/* ══════════════════════════════════════════════════════════════
+   Service page header on small screens.
+   The scroll-spy stylesheet re-declared .sv-navtitle{display:flex}
+   after the rule that hid it, so the service name reappeared on
+   phones, wrapped "Back to all services" onto three lines and
+   squeezed the CTA. Hide it again here, last, and keep the row
+   on a single line.
+   ══════════════════════════════════════════════════════════════ */
+.svpage .sv-nav .in{gap:10px;flex-wrap:nowrap}
+.svpage .sv-back{white-space:nowrap;flex:0 1 auto;min-width:0}
+.svpage .sv-back span{overflow:hidden;text-overflow:ellipsis}
+.svpage .sv-nav .cta{flex:none;white-space:nowrap}
+
+@media (max-width:820px){
+  .svpage .sv-navtitle{display:none !important}
+}
+@media (max-width:600px){
+  .svpage .sv-nav .in{padding-block:9px;gap:8px}
+  .svpage .sv-back{font-size:.84rem;gap:6px;min-height:40px}
+  .svpage .sv-back svg{width:15px;height:15px}
+  .svpage .sv-nav .cta{padding:9px 14px;font-size:.78rem;min-height:40px}
+}
+@media (max-width:380px){
+  .svpage .sv-back{font-size:.8rem}
+  .svpage .sv-nav .cta{padding:8px 12px;font-size:.74rem}
+}

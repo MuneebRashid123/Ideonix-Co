@@ -1,0 +1,134 @@
+/* ══════════════════════════════════════════════════════════════
+   Discuss band · bigger results boxes · budget field · channel pick
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── the 1M+ / 24-7 / 3–4 wks / 4.8x boxes ──
+   they sit on a light violet-to-white band, so these are solid
+   cards with dark type, not translucent panels */
+.dmx-results{list-style:none;margin:clamp(30px,4vw,44px) 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;max-width:none}
+.dmx-results li{position:relative;overflow:hidden;isolation:isolate;text-align:left;
+  display:flex;flex-direction:column;justify-content:flex-end;gap:9px;
+  min-height:140px;padding:26px 24px;border-radius:22px;
+  background:#fff;border:1px solid var(--line);
+  box-shadow:0 16px 34px -24px rgba(42,26,94,.5);
+  transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .35s}
+.dmx-results li::before{content:'';position:absolute;right:-24%;top:-34%;
+  width:74%;height:82%;z-index:-1;border-radius:50%;opacity:.34;
+  background:radial-gradient(circle,var(--accent,#BBFE11),transparent 68%);
+  transition:opacity .45s,transform .55s var(--e)}
+/* the little dash above each figure was reading as a strikethrough */
+.dmx-results li::after{content:none}
+.dmx-results li:nth-child(1){--accent:#BBFE11}
+.dmx-results li:nth-child(2){--accent:#8B5CF6}
+.dmx-results li:nth-child(3){--accent:#38BDF8}
+.dmx-results li:nth-child(4){--accent:#F5A623}
+.dmx-results li:hover{transform:translateY(-9px);border-color:#C4B5FD;
+  box-shadow:0 30px 56px -26px rgba(42,26,94,.55)}
+.dmx-results li:hover::before{opacity:.62;transform:scale(1.16)}
+
+.dmx-results li b{display:block;font-size:clamp(1.6rem,3.6vw,2.15rem);line-height:1;
+  color:var(--navy);font-weight:800;letter-spacing:-.02em;transition:color .35s,transform .4s var(--e)}
+.dmx-results li:hover b{color:var(--navy-2);transform:translateY(-2px)}
+.dmx-results li span{display:block;font-size:.88rem;line-height:1.5;color:var(--muted)}
+
+/* ── discuss band under the hero ───────────────────────────── */
+.dsx{position:relative;overflow:hidden;padding:clamp(46px,6vw,80px) 0;
+  background:linear-gradient(168deg,#FFFFFF 0%,#F7F3FF 58%,#F0E9FF 100%);
+  border-bottom:1px solid var(--line)}
+.dsx::before{content:'';position:absolute;left:-6%;top:-24%;width:46%;height:70%;pointer-events:none;
+  background:radial-gradient(circle,rgba(187,254,17,.22),transparent 66%)}
+.dsx .shell{position:relative;z-index:2}
+.dsx-in{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(26px,4vw,52px);align-items:center}
+.dsx-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;
+  background:var(--navy-tint);border:1px solid #DDD6FE;color:var(--navy-2);
+  font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.dsx-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--lime)}
+.dsx-copy h2{margin:18px 0 0;color:var(--navy);font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.16}
+.dsx-copy h2 em{font-style:normal;position:relative;z-index:0}
+.dsx-copy h2 em::after{content:'';position:absolute;left:-3px;right:-3px;bottom:.06em;height:.3em;
+  background:var(--lime);border-radius:3px;z-index:-1}
+.dsx-copy > p{margin:14px 0 0;max-width:54ch;font-size:1rem;line-height:1.72;color:var(--body)}
+.dsx-points{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px}
+.dsx-points li{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;border-radius:15px;
+  background:#fff;border:1px solid var(--line);
+  transition:transform .4s var(--e),border-color .3s,box-shadow .4s var(--e)}
+.dsx-points li:hover{transform:translateX(6px);border-color:#C4B5FD;box-shadow:var(--shadow-sm)}
+.dsx-points .tk{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+  background:var(--navy-tint);color:var(--navy-2);font-size:.82rem;font-weight:800;
+  transition:background .35s,color .35s,transform .45s var(--e)}
+.dsx-points li:hover .tk{background:var(--lime);color:var(--on-lime);transform:rotate(-8deg) scale(1.08)}
+.dsx-points b{display:block;font-size:.94rem;color:var(--navy)}
+.dsx-points span{display:block;margin-top:2px;font-size:.86rem;line-height:1.55;color:var(--muted)}
+.dsx-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.dsx-btn{position:relative;overflow:hidden;isolation:isolate;
+  display:inline-flex;align-items:center;gap:9px;min-height:var(--tap);
+  padding:14px 26px;border-radius:999px;text-decoration:none;
+  font-size:.88rem;font-weight:800;
+  transition:transform .35s var(--e),box-shadow .35s,background .3s,border-color .3s,color .3s}
+.dsx-btn::before{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;z-index:-1;
+  transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  transition:left .65s var(--e)}
+.dsx-btn:hover::before{left:140%}
+.dsx-btn-p{background:var(--lime);color:var(--on-lime);
+  box-shadow:0 16px 32px -16px rgba(187,254,17,.95)}
+.dsx-btn-p:hover{transform:translateY(-4px) scale(1.03);background:var(--navy-2);color:#fff;
+  box-shadow:0 22px 42px -18px rgba(109,40,217,.9)}
+.dsx-btn-g{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.dsx-btn-g:hover{transform:translateY(-4px) scale(1.03);border-color:var(--navy-2);color:var(--navy-2)}
+.dsx-btn:active{transform:translateY(-1px) scale(.96)}
+.dsx-btn svg{transition:transform .35s var(--e)}
+.dsx-btn:hover svg{transform:translateX(5px)}
+.dsx-side{display:grid;gap:14px}
+.dsx-card{padding:20px 22px;border-radius:18px;background:#fff;border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+  transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .3s}
+.dsx-card:hover{transform:translateY(-6px) scale(1.015);border-color:#C4B5FD;box-shadow:var(--shadow-lg)}
+.dsx-card b{display:block;font-size:1rem;color:var(--navy)}
+.dsx-card span{display:block;margin-top:6px;font-size:.88rem;line-height:1.6;color:var(--body)}
+.dsx-card.is-lime{background:linear-gradient(150deg,#2A1A5E,#4C1D95);border-color:transparent}
+.dsx-card.is-lime b{color:var(--lime)}
+.dsx-card.is-lime span{color:rgba(255,255,255,.76)}
+
+/* ── budget field + notes ──────────────────────────────────── */
+.cur-tag{margin-left:8px;padding:3px 9px;border-radius:999px;background:var(--lime-tint);
+  border:1px solid #E4F7B8;color:#3F6212;font-size:.68rem;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
+#f-notes{width:100%;font:inherit;font-size:.92rem;line-height:1.6;color:var(--navy);
+  padding:12px 14px;border-radius:13px;border:1px solid var(--line);background:#fff;resize:vertical;
+  transition:border-color .3s,box-shadow .3s}
+#f-notes:focus{outline:none;border-color:var(--navy-2);box-shadow:0 0 0 3px rgba(109,40,217,.16)}
+
+/* ── pick a channel after sending ──────────────────────────── */
+.sent-pick{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);text-align:left}
+.sent-pick .pick span{text-align:left}
+.sent-pick-lbl{margin:0 0 14px;font-size:.88rem;line-height:1.6;color:var(--body)}
+.sent-pick-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pick{display:flex;align-items:center;gap:12px;padding:15px 16px;border-radius:16px;
+  text-decoration:none;border:1px solid var(--line);background:#fff;cursor:pointer;
+  transition:transform .4s var(--e),box-shadow .4s var(--e),border-color .3s,background .3s}
+.pick:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pick:active{transform:translateY(-1px) scale(.97)}
+.pick b{display:block;font-size:.94rem;color:var(--navy)}
+.pick small{display:block;margin-top:2px;font-size:.76rem;color:var(--muted)}
+.pick svg{flex:none;transition:transform .4s var(--e)}
+.pick:hover svg{transform:scale(1.12) rotate(-6deg)}
+.pick-wa{color:#128C7E}
+.pick-wa:hover{border-color:#25D366;background:#F3FDF7}
+.pick-mail{color:var(--navy-2)}
+.pick-mail:hover{border-color:#C4B5FD;background:var(--navy-tint)}
+.sent-pick-note{margin:13px 0 0;font-size:.78rem;color:var(--faint)}
+
+@media (max-width:980px){
+  .dsx-in{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .sent-pick-row{grid-template-columns:1fr}
+  .dmx-results{grid-template-columns:1fr 1fr}
+  .dmx-results li{min-height:114px;padding:18px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .dmx-results li,.dsx-points li,.dsx-card,.dsx-btn,.pick{transition:none}
+  .dmx-results li:hover,.dsx-points li:hover,.dsx-card:hover,
+  .dsx-btn:hover,.pick:hover{transform:none}
+}

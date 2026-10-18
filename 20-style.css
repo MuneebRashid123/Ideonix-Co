@@ -1,0 +1,4 @@
+/* justify-content:flex-end makes overflow above the start edge
+   unreachable, so pin to the bottom with an auto margin instead */
+.svai .dmx-thread{justify-content:flex-start}
+.svai .dmx-thread > *:first-child{margin-top:auto}

@@ -1,0 +1,147 @@
+/* ══════════════════════════════════════════════════════════════
+   SERVICE DETAIL — AI conversation, scroll-spy nav,
+   clearer banner photo, section entrance + hover motion
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── banner photo reads more clearly ───────────────────────── */
+.svpage .sv-banner{transform:scale(1.06);animation:svBannerIn 1.4s var(--e) both}
+@keyframes svBannerIn{from{transform:scale(1.14);opacity:0}to{transform:scale(1.06);opacity:1}}
+.svpage .sv-banner::after{
+  background:linear-gradient(100deg,
+    rgba(20,10,50,.90) 0%,
+    rgba(30,17,72,.78) 34%,
+    rgba(58,24,120,.52) 64%,
+    rgba(76,29,149,.34) 100%)}
+.svpage .sv-hero.has-banner::after{opacity:.07}
+.svpage .sv-hero.has-banner .sv-lede{color:rgba(255,255,255,.9);
+  text-shadow:0 1px 12px rgba(15,8,38,.5)}
+.svpage .sv-hero.has-banner h1{text-shadow:0 2px 22px rgba(15,8,38,.45)}
+.svpage .sv-hero.has-banner .sv-art{background:rgba(20,10,50,.34);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+
+/* ── sticky nav: which section you are in ──────────────────── */
+.sv-navtitle{display:flex;align-items:center;justify-content:center;gap:8px}
+.sv-navtitle .svc{font-weight:800;color:var(--navy)}
+.sv-navtitle .sep{width:5px;height:5px;border-radius:50%;background:#C4B5FD;flex:none}
+.sv-navtitle .sec{font-weight:600;color:var(--navy-2);
+  max-width:32ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:opacity .3s var(--e),transform .3s var(--e)}
+.sv-navtitle .sec.swap{opacity:0;transform:translateY(-5px)}
+@media (max-width:900px){.sv-navtitle .sec,.sv-navtitle .sep{display:none}}
+
+/* ── AI conversation section ───────────────────────────────── */
+.svai{position:relative;overflow:hidden;padding:clamp(46px,6vw,78px) 0;
+  background:linear-gradient(165deg,#1B0F42 0%,#2A1A5E 48%,#3B1F86 100%);color:rgba(255,255,255,.78)}
+.svai::before{content:'';position:absolute;right:-10%;top:-20%;width:56%;height:80%;pointer-events:none;
+  background:radial-gradient(circle,rgba(187,254,17,.16),transparent 66%)}
+.svai .shell{position:relative;z-index:2}
+.svai-head{max-width:640px}
+.svai-mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;
+  background:var(--lime);color:var(--on-lime);margin-bottom:16px;
+  box-shadow:0 14px 30px -14px rgba(187,254,17,.9)}
+.svai .sv-eyebrow{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.24);color:#fff}
+.svai-head h2{margin:16px 0 0;color:#fff;font-size:clamp(1.5rem,3.8vw,2.2rem);line-height:1.2}
+.svai-head p{margin:14px 0 0;font-size:1rem;line-height:1.72;color:rgba(255,255,255,.76);max-width:56ch}
+
+.svai-grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);
+  gap:clamp(26px,4vw,54px);align-items:center;margin-top:clamp(28px,4vw,46px)}
+.svai-stage{display:flex;flex-direction:column;align-items:center;gap:16px}
+.svai .dmx-col{flex:0 1 auto;width:100%;opacity:1;transform:none;filter:none}
+.svai .dmx-phone{aspect-ratio:9/17.5}
+.svai .dmx-thread{gap:9px;padding:12px 12px 10px}
+.svai .dmx-msg{font-size:.8rem;line-height:1.5;padding:9px 12px;border-radius:15px;max-width:88%}
+.svai .dmx-dmhead b{font-size:.82rem}
+.svai .dmx-dmhead span{font-size:.68rem}
+.svai .dmx-av{width:28px;height:28px;font-size:.7rem}
+.svai .dmx-input{font-size:.72rem;padding:9px 12px}
+.svai .dmx-card{width:84%}
+.svai .dmx-card .meta b{font-size:.78rem}
+.svai .dmx-card .meta .tm{font-size:.66rem}
+.svai .dmx-card .btn{font-size:.68rem;padding:7px}
+.svai-replay{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;
+  font:inherit;font-size:.82rem;font-weight:700;
+  transition:background .3s,border-color .3s,transform .35s var(--e)}
+.svai-replay:hover{background:rgba(187,254,17,.16);border-color:rgba(187,254,17,.5);
+  transform:translateY(-3px)}
+.svai-replay:active{transform:translateY(-1px) scale(.96)}
+.svai-replay svg{transition:transform .5s var(--e)}
+.svai-replay:hover svg{transform:rotate(-180deg)}
+.svai-replay:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+
+.svai-steps{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.svai-step{display:grid;grid-template-columns:40px 1fr;gap:15px;align-items:start;
+  padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);
+  transition:background .35s,border-color .35s,transform .4s var(--e)}
+.svai-step:hover{background:rgba(255,255,255,.13);border-color:rgba(187,254,17,.45);
+  transform:translateX(6px)}
+.svai-step .n{width:32px;height:32px;border-radius:11px;display:grid;place-items:center;
+  background:rgba(187,254,17,.16);color:var(--lime);font-size:.85rem;font-weight:800;
+  transition:background .35s,color .35s,transform .45s var(--e)}
+.svai-step:hover .n{background:var(--lime);color:var(--on-lime);transform:rotate(-8deg) scale(1.08)}
+.svai-step b{display:block;font-size:.95rem;color:#fff;margin-bottom:3px}
+.svai-step span{display:block;font-size:.86rem;line-height:1.6;color:rgba(255,255,255,.68)}
+.svai-tags{margin-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.svai-tags b{width:100%;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);margin-bottom:2px}
+.svai-tags span{padding:8px 14px;border-radius:999px;font-size:.8rem;font-weight:700;
+  background:rgba(187,254,17,.12);border:1px solid rgba(187,254,17,.34);color:#E4FFA8;
+  transition:background .3s,transform .35s var(--e)}
+.svai-tags span:hover{background:var(--lime);color:var(--on-lime);transform:translateY(-3px)}
+
+/* ── "AI is included" note inside What we provide ──────────── */
+.svai-note{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  margin-top:22px;padding:18px 22px;border-radius:18px;
+  background:linear-gradient(120deg,#2A1A5E,#4C1D95);color:rgba(255,255,255,.8);
+  box-shadow:0 20px 42px -24px rgba(42,26,94,.8)}
+.svai-note .ic{flex:none;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+  background:var(--lime);color:var(--on-lime)}
+.svai-note p{margin:0;flex:1 1 320px;font-size:.9rem;line-height:1.6}
+.svai-note b{color:#fff}
+.svai-note a{flex:none;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.28);color:#fff;text-decoration:none;
+  font-size:.82rem;font-weight:700;transition:background .3s,transform .35s var(--e)}
+.svai-note a:hover{background:var(--lime);border-color:var(--lime);color:var(--on-lime);
+  transform:translateY(-3px)}
+
+/* ── section entrance: children stagger in ─────────────────── */
+.svpage .sv-cards .sv-card,
+.svpage .svprovide-list li,
+.svpage .svclients-row .svclient,
+.svpage .svstats-row .svstat,
+.svpage .svai-steps .svai-step{
+  opacity:0;transform:translateY(16px);
+  transition:opacity .55s var(--e),transform .55s var(--e),
+             box-shadow .45s var(--e),border-color .3s,background .35s}
+.svpage .rv.seen .sv-card,
+.svpage .rv.seen li,
+.svpage .rv.seen .svclient,
+.svpage .rv.seen .svstat,
+.svpage .rv.seen .svai-step,
+.svpage .sv-cards.seen .sv-card,
+.svpage .svstats-row.seen .svstat,
+.svpage .svclients-row.seen .svclient{opacity:1;transform:none}
+.svpage .sv-cards .sv-card:nth-child(n){transition-delay:calc((var(--n,0)) * 70ms)}
+.svpage .svprovide-list li{transition-delay:calc((var(--n,0)) * 60ms)}
+.svpage .svai-steps .svai-step{transition-delay:calc((var(--n,0)) * 80ms)}
+.svpage .svstats-row .svstat{transition-delay:calc((var(--n,0)) * 70ms)}
+.svpage .svclients-row .svclient{transition-delay:calc((var(--n,0)) * 70ms)}
+
+/* provide list rows react to the pointer */
+.svprovide-list li{padding:7px 10px;margin-left:-10px;border-radius:11px}
+.svprovide-list li:hover{background:var(--navy-tint);transform:translateX(5px)}
+.svprovide-list.is-dark li:hover{background:rgba(187,254,17,.1)}
+
+@media (max-width:980px){
+  .svai-grid{grid-template-columns:1fr}
+  .svai-stage{max-width:340px;margin-inline:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .svpage .sv-banner{animation:none;transform:none}
+  .svai-step,.svai-tags span,.svai-replay,.svai-note a,.svprovide-list li{transition:none}
+  .svai-step:hover,.svai-tags span:hover,.svai-replay:hover,.svai-note a:hover,
+  .svprovide-list li:hover{transform:none}
+  .svpage .sv-cards .sv-card,.svpage .svprovide-list li,.svpage .svclients-row .svclient,
+  .svpage .svstats-row .svstat,.svpage .svai-steps .svai-step{opacity:1;transform:none;transition:none}
+}

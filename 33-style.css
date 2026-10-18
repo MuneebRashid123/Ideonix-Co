@@ -1,0 +1,138 @@
+/* ══════════════ VIDEO HERO BANNERS (mobile + desktop versions) ══════════════ */
+/* Each video slide carries two <video>s: .vid-m (phones) and .vid-d (desktop).
+   Same fade-up entrance as the other slides; the video itself is the animation. */
+.slide-vid{overflow:hidden;animation:none;background-size:100% 100%}
+.slide-vid video{position:absolute;left:0;bottom:0;width:100%;height:auto;display:block;
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 24%)}
+.slide-vid .vid-d{display:none}
+.slide-vid .vid-bg{display:none!important}
+.slide-vid .vid-m{display:block}
+
+/* matched to the top edge of each video so there is no seam above it */
+.v-figma{background-image:linear-gradient(90deg,#EBFCB6 0%,#FEFEFE 50%,#EBFCB6 100%)}
+.v-workflow{background-image:linear-gradient(90deg,#EDE3FC 0%,#F9F8FD 50%,#E4D8FC 100%)}
+
+/* light-background slides: dark text instead of white */
+.slide-light h1{color:var(--navy);text-shadow:none}
+.slide-light h1 em{color:#6D28D9}
+.slide-light p{color:#3B2A70;text-shadow:none}
+.slide-light .badge{background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.25);color:var(--navy);
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.slide-light .slide-cta .btn-g{background:rgba(255,255,255,.7);border-color:rgba(42,26,94,.28);color:var(--navy);
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.slide-light .slide-cta .btn-g:hover{background:#fff;border-color:var(--navy)}
+
+/* dots + arrows must stay visible over a light slide */
+.slider.is-light .dots button{background:rgba(42,26,94,.25)}
+.slider.is-light .dots button.on{background:#6D28D9}
+.slider.is-light .arrows button{background:rgba(255,255,255,.75);border-color:rgba(42,26,94,.25);color:var(--navy)}
+.slider.is-light .arrows button:hover{background:#fff;border-color:var(--navy)}
+
+
+/* ── show the right video for the screen: phones get the 4:5 video, 768px+ gets the wide one ── */
+@media (min-width:768px){
+  .slide-vid .vid-m{display:none}
+  .slide-vid .vid-d{display:block}
+  .v-figma{background-image:linear-gradient(90deg,#EAFEB7 0%,#FFFFFF 55%,#FFFFFF 100%)}
+  .v-workflow{background-image:linear-gradient(90deg,#F4EDFB 0%,#FDFAFE 50%,#F1E9FC 100%)}
+}
+@media (prefers-reduced-motion:reduce){.slide-vid video{display:none!important}
+  .slide-vid .vid-d,.slide-vid .vid-m{display:none}}
+
+/* ── banners 3-5 background colours (matched to the video edges) ── */
+.v-chatbot{background-image:linear-gradient(90deg,#F3FBD6 0%,#FDFDFD 50%,#FAFAFC 100%)}
+.v-social{background-image:linear-gradient(90deg,#F9FCE7 0%,#F9FCE7 50%,#FCFDF7 100%)}
+.v-launch{background-image:linear-gradient(90deg,#EADBFA 0%,#FCFCFC 50%,#EDDFFB 100%)}
+@media (min-width:768px){
+  .v-chatbot{background-image:linear-gradient(90deg,#F6FED9 0%,#FBFAFF 55%,#EFF8CD 100%)}
+  .v-social{background-image:linear-gradient(90deg,#F1E4F9 0%,#F9F6FC 55%,#F2EEF7 100%)}
+  .v-launch{background-image:linear-gradient(90deg,#E9FDB6 0%,#FAFCEE 50%,#FFFFFF 100%)}
+}
+
+/* ══════════ THE BANNER IS A CARD: it sits BELOW the menu (never touching it) and holds the video, text and buttons ══════════ */
+.slider.is-light{background:#F6F4FC}                               /* calm strip behind the menu and the dots */
+.slide.slide-light{--cx:24px;--cpad:clamp(28px,3.6vw,64px);
+  margin:92px var(--cx) 64px;border-radius:28px;overflow:hidden;
+  box-shadow:0 18px 50px -24px rgba(60,30,120,.35),0 0 0 1px rgba(109,40,217,.08)}
+.slide-light .slide-scrim{display:none}
+
+/* ── DESKTOP (1200px+): video fills the whole card, text + buttons sit INSIDE it on the left ── */
+@media (min-width:1200px){
+  .v-figma{--a:.50}.v-workflow{--a:.46}.v-chatbot{--a:.42}.v-social{--a:.56}.v-launch{--a:.50}  /* where the artwork starts (fraction of video width) */
+  .slide.slide-light.on{display:grid;align-content:center;justify-items:start;
+    min-height:max(520px,38vw);padding:56px var(--cpad)}
+  .slide-light .slide-vid{position:absolute;inset:0;z-index:-2;overflow:hidden;background:none;width:auto;margin:0}
+  .slide-light .slide-vid video.vid-fg{position:absolute;inset:0;left:0;top:0;bottom:auto;width:100%;height:100%;max-width:none;
+    object-fit:cover;object-position:right center;-webkit-mask-image:none;mask-image:none}
+  /* --zw = free width left of the artwork inside the card; the text is sized to fill it (--vf is set by the script) */
+  .slide-light{--zw:calc((var(--a,.5) - 1 + var(--vf,1)) / var(--vf,1) * (100vw - 2 * var(--cx)) - var(--cpad) - 20px)}
+  .slide-light .slide-body{margin:0;max-width:max(260px,var(--zw))}
+  .slide-light .badge{font-size:clamp(.78rem,calc(var(--zw)/44),1rem);padding-block:clamp(7px,calc(var(--zw)/70),11px)}
+  .slide-light h1{font-size:clamp(1.7rem,calc(var(--zw)/11),3.6rem);line-height:1.04;margin:14px 0 12px}
+  .slide-light p{max-width:100%;font-size:clamp(.92rem,calc(var(--zw)/31),1.25rem);line-height:1.5}
+  .slide-light .slide-cta{margin-top:clamp(16px,calc(var(--zw)/30),28px)}
+  .slide-light .slide-cta .btn{font-size:clamp(.92rem,calc(var(--zw)/36),1.15rem);
+    min-height:clamp(46px,calc(var(--zw)/11),60px);padding-inline:clamp(18px,calc(var(--zw)/22),34px)}
+}
+
+/* ── TABLET (768-1199px): the card holds the full-width video, then the text + buttons, all inside it ── */
+@media (min-width:768px) and (max-width:1199px){
+  .slide.slide-light{--cx:18px;--cpad:30px}
+  .slide.slide-light.on{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;
+    min-height:0;padding:0 var(--cpad) 38px}
+  .slide-light .slide-vid{order:1;position:relative;inset:auto;z-index:0;flex:none;overflow:hidden;background:none;
+    width:calc(100% + 2 * var(--cpad));margin:0 calc(-1 * var(--cpad)) 22px;aspect-ratio:1920/700}
+  .slide-light .slide-vid video.vid-fg{position:absolute;inset:0;left:0;top:0;bottom:auto;width:100%;height:100%;max-width:none;
+    object-fit:cover;-webkit-mask-image:none;mask-image:none}
+  .slide-light .slide-body{order:2;max-width:780px;margin:0}
+  .slide-light p{max-width:64ch}
+}
+
+/* ── PHONE (under 768px): ONE banner picture. The video is the whole card; compact badge, headline, paragraph and BOTH buttons
+   sit directly on the video's empty top area, so nothing looks separate ── */
+@media (max-width:767px){
+  /* --ar  = artwork height / card width (the space kept free for the picture under the text)
+     --bc  = share of the video's empty bottom that is cropped away (removes the blank strip under the artwork)
+     --vk  = video height / video width */
+  .v-figma{--ar:.49;--bc:.12;--vk:1.25}
+  .v-workflow{--ar:1.10;--bc:0;--vk:1.574}
+  .v-chatbot{--ar:.56;--bc:0;--vk:1.25}
+  .v-social{--ar:.74;--bc:0;--vk:1.25}
+  .v-launch{--ar:.44;--bc:.15;--vk:1.25}
+  .slide.slide-light{--cx:12px;--cpad:16px;margin:84px var(--cx) 64px;border-radius:24px}
+  .slide.slide-light.on{display:flex;flex-direction:column;align-items:stretch;min-height:0;
+    padding:0 var(--cpad) 18px;background:#fff}
+  /* video FIRST (top of the card), text + buttons BELOW it */
+  .slide-light .slide-vid{order:1;position:relative;inset:auto;z-index:0;flex:none;overflow:hidden;
+    width:calc(100% + 2 * var(--cpad));margin:0 calc(-1 * var(--cpad)) 14px;
+    height:calc(var(--ar,.5) * (100vw - 2 * var(--cx)) + 2px)}
+  .slide-light .slide-vid video.vid-m{position:absolute;left:0;right:auto;top:auto;transform:none;width:100%;height:auto;
+    bottom:calc(-1 * var(--bc,0) * var(--vk,1.25) * (100vw - 2 * var(--cx)));
+    -webkit-mask-image:none;mask-image:none}
+  .slide-light .slide-body{order:2;max-width:none}
+  .slide-light .badge{align-self:flex-start;font-size:11px;padding:4px 10px;line-height:1.2}
+  .slide-light h1{font-size:clamp(20px,6.1vw,25px);line-height:1.08;margin:8px 0 6px}
+  .slide-light p{font-size:clamp(12px,3.4vw,13.5px);line-height:1.4;margin:0}
+  .slide-light .slide-cta{display:flex;gap:8px;margin-top:12px}
+  .slide-light .slide-cta .btn{flex:1 1 0;width:auto;min-height:40px;padding:0 8px;font-size:clamp(12px,3.3vw,13.5px);
+    margin:0;justify-content:center;text-align:center;line-height:1.15}
+}
+
+/* 10 slides now: let the progress dots shrink so they never push the arrows off screen */
+.dots{min-width:0;gap:5px}
+.dots button{width:auto;flex:0 1 26px;min-width:6px}
+.dots button.on{flex:0 1 44px}
+
+/* ══════════ HEADER on light banners: no dark shade, no white logo box, purple menu ══════════ */
+.nav::before{display:none}                                   /* removes the dark gradient behind logo + menu */
+.logo{background:transparent;box-shadow:none;padding:0}      /* logo sits straight on the banner */
+.nav-links,.nav.stuck .nav-links{color:#6D28D9;text-shadow:none}
+.nav-links a:hover,.nav.stuck .nav-links a:hover{color:var(--navy)}
+.tl,.nav.stuck .tl{color:#6D28D9;border-left-color:rgba(109,40,217,.3);text-shadow:none}
+.soc a{background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.25);color:#6D28D9;
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.soc a:hover{background:rgba(109,40,217,.16);border-color:#6D28D9}
+.burger{background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.25);backdrop-filter:none;-webkit-backdrop-filter:none}
+.burger span{background:#6D28D9}

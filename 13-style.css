@@ -1,0 +1,8 @@
+/* ── the service nav is genuinely fixed ──
+   body has overflow-x:hidden, which breaks position:sticky, so the
+   header is pinned and the page is padded by its measured height. */
+.svpage .sv-nav{position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 6px 22px -18px rgba(42,26,94,.9)}
+.svpage.on{padding-top:var(--navh,62px)}
+.svpage .sv-nav .in{max-width:var(--shell,1200px)}

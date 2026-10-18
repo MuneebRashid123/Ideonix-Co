@@ -1,0 +1,2 @@
+/* the chatbot writes with textContent, so keep its line breaks */
+.cw .msg{white-space:pre-wrap}
